@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Windows.Forms;
+
+namespace CardMemoryApp
+{
+    public partial class frmCardFlipGame : Form
+    {
+        string counter = "";
+        string grats = "";
+        
+        public frmCardFlipGame()
+        {
+            InitializeComponent();
+            lblDateTime.Hide();
+            ClockTick();
+            timer1 = null;
+        }
+
+        private void ClockTick()
+        {
+            timer1 = new Timer();
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = 1000; // 1 second
+            timer1.Start();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {            
+            Text = "Card Flip Memory Game" + DateTime.Now.ToString("        MM/dd/yyyy  hh:mm:ss");
+            //lblTimeCounter.Text = TimeSpan.FromSeconds(x).ToString();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnGo_Click(object sender, EventArgs e)
+        {
+            /*DateTime Date = DateTime.Now;
+
+            timer2 = new Timer();
+            timer2.Tick += new EventHandler(timer2_Tick);
+            timer2.Interval = 10; // .01 second
+            timer2.Start();
+            lblTimeCounter.Text = Date.ToString("mm:ss:fff");*/
+            stopwatch_Count();
+        }
+
+        private void stopwatch_Count()
+        {
+            Stopwatch timer = new Stopwatch();
+            
+            timer.Start();
+            long ticks1 = timer.ElapsedTicks;
+            lblTimeCounter.Text = ticks1.ToString();
+            System.Threading.Thread.Sleep(5000);
+            
+            timer.Stop();
+            
+            timer.Start();
+            
+            System.Threading.Thread.Sleep(5000);
+            
+            timer.Stop();
+            
+        }
+        /*private void timer2_Tick(object sender, EventArgs e)
+        {
+            Stopwatch Timer = new Stopwatch();
+            lblTimeCounter.Text = TimeSpan.FromSeconds(x).ToString();
+            lblTimeCounter.Text = Timer.ToString("mm:ss:fff");
+        }*/
+    }
+}
